@@ -1,5 +1,5 @@
 {
-	"name": "nodejs-rest-api",
+	"name": "school-api",
 	"version": "1.0.0",
 	"main": "index.ts",
 	"repository": "https://github.com/AthirsonSilva/nodejs-rest-api.git",
