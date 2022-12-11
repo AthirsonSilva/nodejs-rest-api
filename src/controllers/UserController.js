@@ -41,6 +41,26 @@ class UserController {
 			})
 		}
 	}
+
+	update = async (request, response) => {
+		try {
+			const user = await User.findByPk(request.params.id)
+
+			if (!user) return response.status(404).json({ message: 'User not found' })
+
+			const updatedUser = await user.update(request.body)
+
+			response.status(200).json({
+				message: 'User updated with success!',
+				updatedUser
+			})
+		} catch (error) {
+			response.status(400).json({
+				message: 'Error at updating user',
+				error: error.errors.map(e => e.message) ?? error
+			})
+		}
+	}
 }
 
 export default new UserController()
