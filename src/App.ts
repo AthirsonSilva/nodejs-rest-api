@@ -10,12 +10,12 @@ class App {
 		this.routes()
 	}
 
-	middlewares = () => {
+	middlewares = (): void => {
 		this.app.use(express.urlencoded({ extended: true }))
 		this.app.use(express.json())
 	}
 
-	routes = () => {
+	routes = (): void => {
 		this.app.use('/', HomeRoutes)
 	}
 }
