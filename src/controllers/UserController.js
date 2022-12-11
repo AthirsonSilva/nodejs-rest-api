@@ -29,6 +29,10 @@ class UserController {
 
 	show = async (request, response) => {
 		try {
+			if (!request.params.id) {
+				return response.status(400).json({ message: 'User id is required' })
+			}
+
 			const user = await User.findByPk(request.params.id)
 
 			if (!user) return response.status(404).json({ message: 'User not found' })
@@ -44,6 +48,10 @@ class UserController {
 
 	update = async (request, response) => {
 		try {
+			if (!request.params.id) {
+				return response.status(400).json({ message: 'User id is required' })
+			}
+
 			const user = await User.findByPk(request.params.id)
 
 			if (!user) return response.status(404).json({ message: 'User not found' })
@@ -57,6 +65,27 @@ class UserController {
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at updating user',
+				error: error.errors.map(e => e.message) ?? error
+			})
+		}
+	}
+
+	delete = async (request, response) => {
+		try {
+			if (!request.params.id) {
+				return response.status(400).json({ message: 'User id is required' })
+			}
+
+			const user = await User.findByPk(request.params.id)
+
+			if (!user) return response.status(404).json({ message: 'User not found' })
+
+			await user.destroy()
+
+			response.status(200).json({ message: 'User deleted with success!' })
+		} catch (error) {
+			response.status(400).json({
+				message: 'Error at deleting user',
 				error: error.errors.map(e => e.message) ?? error
 			})
 		}
