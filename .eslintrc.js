@@ -14,6 +14,8 @@ module.exports = {
 		'no-tabs': 'off',
 		indent: ['warn', 'tab'],
 		'@typescript-eslint/indent': ['warn', 'tab'],
-		'@typescript-eslint/space-before-function-paren': 'off'
+		'@typescript-eslint/space-before-function-paren': 'off',
+		'space-before-function-paren': 'off',
+		'import/first': 'off'
 	}
 }

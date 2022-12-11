@@ -6,10 +6,10 @@
 	"author": "Athirson <athirsonarceus@gmail.com>",
 	"license": "MIT",
 	"scripts": {
-		"dev": "nodemon --exec sucrase-node src/server.ts",
-		"nodemon": "nodemon src/server.ts",
+		"dev": "nodemon --exec sucrase-node src/server.js",
+		"nodemon": "nodemon src/server.js",
 		"build": "sucrase src -d dist --transforms typescript,imports",
-		"start": "node dist/index.ts"
+		"start": "node dist/index.js"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^5.0.0",
@@ -19,6 +19,7 @@
 		"eslint-plugin-n": "^15.0.0",
 		"eslint-plugin-promise": "^6.0.0",
 		"nodemon": "^2.0.20",
+		"sequelize-cli": "^6.5.2",
 		"sucrase": "^3.29.0",
 		"typescript": "*"
 	},
@@ -26,6 +27,8 @@
 		"@types/express": "^4.17.14",
 		"@types/node": "^18.11.13",
 		"dotenv": "^16.0.3",
-		"express": "^4.18.2"
+		"express": "^4.18.2",
+		"mariadb": "^3.0.2",
+		"sequelize": "^6.26.0"
 	}
 }
