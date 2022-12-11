@@ -6,6 +6,7 @@ import './database'
 
 import express from 'express'
 import HomeRoutes from './routes/HomeRoutes'
+import UserRoutes from './routes/UserRoutes'
 
 class App {
 	constructor() {
@@ -21,6 +22,7 @@ class App {
 
 	routes = () => {
 		this.app.use('/', HomeRoutes)
+		this.app.use('/users', UserRoutes)
 	}
 }
 
