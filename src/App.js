@@ -5,6 +5,7 @@ dotenv.config()
 import './database'
 
 import express from 'express'
+import AuthRoutes from './routes/AuthRoutes'
 import HomeRoutes from './routes/HomeRoutes'
 import UserRoutes from './routes/UserRoutes'
 
@@ -23,6 +24,7 @@ class App {
 	routes = () => {
 		this.app.use('/', HomeRoutes)
 		this.app.use('/users', UserRoutes)
+		this.app.use('/auth', AuthRoutes)
 	}
 }
 

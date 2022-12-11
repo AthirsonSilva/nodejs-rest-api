@@ -1,4 +1,5 @@
 import bcryptjs from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 import Sequelize, { Model } from 'sequelize'
 
 export default class User extends Model {
@@ -81,5 +82,31 @@ export default class User extends Model {
 		})
 
 		return this
+	}
+
+	checkIfUserExists = async email => {
+		try {
+			return await User.findOne({ where: { email } })
+		} catch (error) {
+			return false
+		}
+	}
+
+	checkPassword = async password => {
+		try {
+			return await bcryptjs.compare(password, this.password_hash)
+		} catch (error) {
+			return false
+		}
+	}
+
+	generateToken = () => {
+		try {
+			return jwt.sign({ id: this.id, email: this.email }, process.env.JWT_SECRET, {
+				expiresIn: process.env.JWT_EXPIRES_IN
+			})
+		} catch (error) {
+			return false
+		}
 	}
 }
