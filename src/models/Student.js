@@ -12,7 +12,8 @@ export default class Student extends Model {
 				height: Sequelize.FLOAT
 			},
 			{
-				sequelize
+				sequelize,
+				tableName: 'students'
 			}
 		)
 
