@@ -6,23 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .env
-*.jpg
-*.png
-*.gif
-*.jpeg
-*.svg
-*.ico
-*.pdf
-*.doc
-*.docx
-*.xls
-*.xlsx
-*.ppt
-*.pptx
-*.zip
-*.rar
-*.tar
-*.tar.gz
+
+uploads/*.png
+uploads/*.jpg
+uploads/*.jpeg
 
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
