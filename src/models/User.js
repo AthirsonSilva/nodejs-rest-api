@@ -18,12 +18,8 @@ export default class User extends Model {
 							msg: 'Name must be between 3 and 255 characters'
 						},
 						is: {
-							args: /^[a-zA-z]+$/i,
+							args: /^[A-Za-z\s]*$/,
 							msg: 'Name must contain only letters'
-						},
-						notContains: {
-							args: ' ',
-							msg: 'Name cannot contain spaces'
 						}
 					}
 				},
@@ -67,7 +63,11 @@ export default class User extends Model {
 						}
 					}
 				},
-				password_hash: Sequelize.STRING
+				password_hash: Sequelize.STRING,
+				is_active: {
+					type: Sequelize.BOOLEAN,
+					defaultValue: true
+				}
 			},
 			{
 				sequelize,
@@ -107,6 +107,15 @@ export default class User extends Model {
 			})
 		} catch (error) {
 			return false
+		}
+	}
+
+	returnNonSensitiveData = () => {
+		return {
+			id: this.id,
+			name: this.name,
+			email: this.email,
+			is_active: this.is_active
 		}
 	}
 }

@@ -18,7 +18,10 @@ class UserController {
 		try {
 			const users = await User.findAll()
 
-			response.status(200).json({ message: 'Users found with success!', users })
+			response.status(200).json({
+				message: 'Users found with success!',
+				users: users.map(user => user.returnNonSensitiveData())
+			})
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at getting users',
@@ -29,15 +32,18 @@ class UserController {
 
 	show = async (request, response) => {
 		try {
-			if (!request.params.id) {
+			if (!request.userId) {
 				return response.status(400).json({ message: 'User id is required' })
 			}
 
-			const user = await User.findByPk(request.params.id)
+			const user = await User.findByPk(request.userId)
 
 			if (!user) return response.status(404).json({ message: 'User not found' })
 
-			response.status(200).json({ message: 'User found with success!', user })
+			response.status(200).json({
+				message: 'User found with success!',
+				user: user.returnNonSensitiveData()
+			})
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at getting user',
@@ -48,11 +54,11 @@ class UserController {
 
 	update = async (request, response) => {
 		try {
-			if (!request.params.id) {
+			if (!request.userId) {
 				return response.status(400).json({ message: 'User id is required' })
 			}
 
-			const user = await User.findByPk(request.params.id)
+			const user = await User.findByPk(request.userId)
 
 			if (!user) return response.status(404).json({ message: 'User not found' })
 
@@ -60,7 +66,7 @@ class UserController {
 
 			response.status(200).json({
 				message: 'User updated with success!',
-				updatedUser
+				updatedUser: updatedUser.returnNonSensitiveData()
 			})
 		} catch (error) {
 			response.status(400).json({
@@ -72,17 +78,24 @@ class UserController {
 
 	delete = async (request, response) => {
 		try {
-			if (!request.params.id) {
-				return response.status(400).json({ message: 'User id is required' })
+			if (!request.userId) {
+				return response
+					.status(400)
+					.json({ message: 'User id is required', request })
 			}
 
-			const user = await User.findByPk(request.params.id)
+			const user = await User.findByPk(request.userId)
 
 			if (!user) return response.status(404).json({ message: 'User not found' })
 
-			await user.destroy()
+			const deletedUser = await user.update({
+				is_active: false
+			})
 
-			response.status(200).json({ message: 'User deleted with success!' })
+			response.status(200).json({
+				message: 'User deleted with success!',
+				deletedUser: deletedUser.returnNonSensitiveData()
+			})
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at deleting user',

@@ -6,10 +6,11 @@ import authRequired from '../middlewares/authRequired'
 const router = Router()
 
 // CRUD routes
-router.get('/', authRequired, userController.index)
+router.get('/', userController.index)
+router.get('/show', authRequired, userController.show)
+
 router.post('/', userController.store)
-router.get('/:id', userController.show)
-router.patch('/:id', userController.update)
-router.delete('/:id', userController.delete)
+router.patch('/', authRequired, userController.update)
+router.delete('/', authRequired, userController.delete)
 
 export default router
