@@ -63,11 +63,7 @@ export default class User extends Model {
 						}
 					}
 				},
-				password_hash: Sequelize.STRING,
-				is_active: {
-					type: Sequelize.BOOLEAN,
-					defaultValue: true
-				}
+				password_hash: Sequelize.STRING
 			},
 			{
 				sequelize,
@@ -100,9 +96,9 @@ export default class User extends Model {
 		}
 	}
 
-	generateToken = () => {
+	generateToken = (email, id) => {
 		try {
-			return jwt.sign({ id: this.id, email: this.email }, process.env.JWT_SECRET, {
+			return jwt.sign({ id, email }, process.env.JWT_SECRET, {
 				expiresIn: process.env.JWT_EXPIRES_IN
 			})
 		} catch (error) {
@@ -114,8 +110,7 @@ export default class User extends Model {
 		return {
 			id: this.id,
 			name: this.name,
-			email: this.email,
-			is_active: this.is_active
+			email: this.email
 		}
 	}
 }

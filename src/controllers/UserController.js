@@ -88,9 +88,7 @@ class UserController {
 
 			if (!user) return response.status(404).json({ message: 'User not found' })
 
-			const deletedUser = await user.update({
-				is_active: false
-			})
+			const deletedUser = await user.destroy()
 
 			response.status(200).json({
 				message: 'User deleted with success!',

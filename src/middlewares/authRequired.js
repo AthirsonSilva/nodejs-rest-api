@@ -24,10 +24,6 @@ const authRequired = async (request, response, next) => {
 			})
 		}
 
-		if (!user.is_active) {
-			return response.status(401).json({ message: 'User is not active' })
-		}
-
 		request.userId = decoded.id
 		request.userEmail = decoded.email
 
