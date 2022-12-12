@@ -9,7 +9,7 @@ class UserController {
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at creating new user',
-				error: error.errors.map(e => e.message) ?? error
+				error: error.errors ? error.errors.map(e => e.message) : error
 			})
 		}
 	}
@@ -25,7 +25,7 @@ class UserController {
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at getting users',
-				error: error.errors.map(e => e.message) ?? error
+				error: error.errors ? error.errors.map(e => e.message) : error
 			})
 		}
 	}
@@ -47,7 +47,7 @@ class UserController {
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at getting user',
-				error: error.errors.map(e => e.message) ?? error
+				error: error.errors ? error.errors.map(e => e.message) : error
 			})
 		}
 	}
@@ -71,7 +71,7 @@ class UserController {
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at updating user',
-				error: error.errors.map(e => e.message) ?? error
+				error: error.errors ? error.errors.map(e => e.message) : error
 			})
 		}
 	}
@@ -99,7 +99,7 @@ class UserController {
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at deleting user',
-				error: error.errors.map(e => e.message) ?? error
+				error: error.errors ? error.errors.map(e => e.message) : error
 			})
 		}
 	}

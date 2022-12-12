@@ -40,7 +40,7 @@ class AuthToken {
 		} catch (error) {
 			response.status(400).json({
 				message: 'Error at fetch students',
-				error: error.errors.map(e => e.message) ?? error
+				error: error.errors ? error.errors.map(e => e.message) : error
 			})
 		}
 	}
