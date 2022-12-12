@@ -6,8 +6,8 @@ import './database'
 
 import express from 'express'
 import AuthRoutes from './routes/AuthRoutes'
-import FileRoutes from './routes/FileRoutes'
 import HomeRoutes from './routes/HomeRoutes'
+import StudentPhotoRoutes from './routes/StudentPhotoRoutes'
 import StudentsRoutes from './routes/StudentRoutes'
 import UserRoutes from './routes/UserRoutes'
 
@@ -28,7 +28,7 @@ class App {
 		this.app.use('/users', UserRoutes)
 		this.app.use('/students', StudentsRoutes)
 		this.app.use('/auth', AuthRoutes)
-		this.app.use('/files', FileRoutes)
+		this.app.use('/files', StudentPhotoRoutes)
 	}
 }
 

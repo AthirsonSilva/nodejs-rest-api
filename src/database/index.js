@@ -4,9 +4,10 @@ dotenv.config()
 
 import { Sequelize } from 'sequelize'
 import Student from '../models/Student'
+import StudentPhoto from '../models/StudentPhoto'
 import User from '../models/User'
 
-const models = [Student, User]
+const models = [Student, User, StudentPhoto]
 
 const connection = new Sequelize(
 	process.env.DATABASE_NAME,
@@ -34,3 +35,4 @@ const connection = new Sequelize(
 )
 
 models.forEach(model => model.init(connection))
+models.forEach(model => model.associate && model.associate(connection.models))
