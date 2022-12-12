@@ -16,7 +16,7 @@ export default {
 		},
 
 		destination: (request, file, callback) => {
-			callback(null, resolve(__dirname, '..', '..', 'uploads'))
+			callback(null, resolve(__dirname, '..', '..', 'uploads', 'images'))
 		},
 
 		filename: (request, file, callback) => {

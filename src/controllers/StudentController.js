@@ -1,16 +1,27 @@
 import Student from '../models/Student'
+import StudentPhoto from '../models/StudentPhoto'
 
 class StudentController {
 	index = async (request, response) => {
 		try {
-			const students = await Student.findAll()
+			const students = await Student.findAll({
+				attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
+				order: [
+					['id', 'DESC'],
+					[StudentPhoto, 'id', 'DESC']
+				],
+				include: {
+					model: StudentPhoto,
+					attributes: ['id', 'original_name', 'file_name']
+				}
+			})
 
 			response
 				.status(200)
-				.json({ message: 'Studends fetched with success!', newStudent: students })
+				.json({ message: 'Studends fetched with success!', students })
 		} catch (error) {
 			response.status(400).json({
-				message: 'Error at fetch students',
+				message: 'Error at fetching students',
 				error: error.errors ? error.errors.map(e => e.message) : error
 			})
 		}
@@ -22,7 +33,17 @@ class StudentController {
 				response.status(400).json({ message: 'ID is required!' })
 			}
 
-			const student = await Student.findByPk(request.params.id)
+			const student = await Student.findByPk(request.params.id, {
+				attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
+				order: [
+					['id', 'DESC'],
+					[StudentPhoto, 'id', 'DESC']
+				],
+				include: {
+					model: StudentPhoto,
+					attributes: ['id', 'original_name', 'file_name', 'url']
+				}
+			})
 
 			if (!student) {
 				response.status(400).json({ message: 'Student not found!' })

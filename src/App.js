@@ -11,6 +11,8 @@ import StudentPhotoRoutes from './routes/StudentPhotoRoutes'
 import StudentsRoutes from './routes/StudentRoutes'
 import UserRoutes from './routes/UserRoutes'
 
+import { resolve } from 'path'
+
 class App {
 	constructor() {
 		this.app = express()
@@ -21,6 +23,7 @@ class App {
 	middlewares = () => {
 		this.app.use(express.urlencoded({ extended: true }))
 		this.app.use(express.json())
+		this.app.use(express.static(resolve(__dirname, '..', 'uploads')))
 	}
 
 	routes = () => {

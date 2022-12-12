@@ -1,4 +1,5 @@
 import Sequelize, { Model } from 'sequelize'
+import appConfig from '../config/appConfig'
 
 export default class StudentPhoto extends Model {
 	static init = sequelize => {
@@ -32,6 +33,12 @@ export default class StudentPhoto extends Model {
 							args: ' ',
 							msg: 'Email cannot contain spaces'
 						}
+					}
+				},
+				url: {
+					type: Sequelize.VIRTUAL,
+					get() {
+						return `${appConfig.url}/images/${this.getDataValue('file_name')}`
 					}
 				}
 			},

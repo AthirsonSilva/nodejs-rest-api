@@ -157,4 +157,8 @@ export default class Student extends Model {
 			height: this.height
 		}
 	}
+
+	static associate = models => {
+		this.hasMany(models.StudentPhoto, { foreignKey: 'student_id' })
+	}
 }
